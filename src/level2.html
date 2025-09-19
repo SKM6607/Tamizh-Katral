@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>தமிழ் கற்றல் — Level 2: ஒலி பொருத்து</title>
+
+  <!-- Playful Tamil font + FontAwesome (from your base) -->
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+Chettan+2:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+  <!-- Level2 stylesheet -->
+  <link rel="stylesheet" href="level2.css">
+</head>
+<body>
+  <div class="game-container">
+    <!-- background motif similar to your home -->
+    <div class="sky">
+      <div class="cloud cloud1"></div>
+      <div class="cloud cloud2"></div>
+    </div>
+    <div class="hills"></div>
+    <div class="temple"></div>
+
+    <!-- Header / Title -->
+    <div class="title-container">
+      <h1 class="main-title">ஒலி - எழுத்து பொருத்து</h1>
+      <p class="sub-title">Level 2 — 13 உயிர் எழுத்துக்கள்</p>
+    </div>
+
+    <!-- Left panel: sound & controls -->
+    <aside class="left-panel">
+      <div class="sound-box">
+        <div id="soundHint" class="sound-hint">🔊</div>
+        <div id="romanLabel" class="roman">—</div>
+        <button id="playSoundBtn" class="play-btn">🔊 ஒலி</button>
+      </div>
+
+      <div class="control-row">
+        <button id="nextBtn" class="control-btn">அடுத்தது</button>
+        <button id="shuffleBtn" class="control-btn ghost">கலக்கு</button>
+        <button id="resetBtn" class="control-btn ghost">மீட்டமை</button>
+      </div>
+
+      <div class="score-area">
+        <div>Round: <span id="roundLabel">0</span></div>
+        <div>Score: <span id="scoreLabel">0</span></div>
+      </div>
+    </aside>
+
+    <!-- Main grid -->
+    <main class="grid" id="grid" aria-label="Vowel choices">
+      <!-- vowel cards will be injected by JS -->
+    </main>
+
+    <!-- Small footer hint -->
+    <footer class="footer">
+      <div class="hint">சரி என்பதைத் தேர்ந்தெடுத்தால் சிறிய பரிசு! தவறானால் மறுபடி முயற்சி செய்.</div>
+    </footer>
+  </div>
+
+  <!-- Confetti canvas -->
+  <canvas id="confetti" class="confetti" aria-hidden="true"></canvas>
+
+  <!-- Level2 script -->
+  <script src="level2.js"></script>
+</body>
+</html>
