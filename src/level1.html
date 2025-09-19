@@ -1,31 +1,66 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ta">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Level 1 — Vowels</title>
+
+    <!-- keep your existing stylesheet (unchanged) -->
     <link rel="stylesheet" href="css/level1.css" />
-    <title>Level 1</title>
+
+    <!-- small inline styles to help the overlay center when JS toggles it -->
+    <style>
+      /* only minimal helper — does not conflict with your file */
+      #proceed-overlay {
+        align-items: center;
+        justify-content: center;
+      }
+    </style>
   </head>
   <body>
-    <div class="card-container">
-      <div class="tinder-card">
+    <!-- SINGLE card version: only one .tinder-card on the page -->
+    <div class="card-container" aria-live="polite" aria-atomic="true">
+      <div class="tinder-card" role="group" aria-label="Vowel card">
         <div class="image-slot">
-          <img src="Image\res\VowelAA.jpg" alt="Card Image" />
+          <h1 class="vowel" id="vowel-glyph" aria-hidden="false">அ</h1>
         </div>
-        <div class="actions">
-          <button class="btn reject">✘</button>
-          <button class="btn accept">✔</button>
+
+        <!-- small progress indicator -->
+        <div
+          id="progress"
+          aria-hidden="true"
+          style="
+            position: absolute;
+            top: 14px;
+            right: 18px;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 600;
+          "
+        >
+          1 / 13
         </div>
-      </div>
-      <div class="tinder-card">
-        <div class="image-slot">
-          <img src="Image\res\VowelUU.jpg" alt="Card Image" />
-        </div>
-        <div class="actions">
-          <button class="btn reject">✘</button>
-          <button class="btn accept">✔</button>
+
+        <div class="actions" role="toolbar" aria-label="Card actions">
+          <button
+            class="btn reject"
+            id="btn-play"
+            aria-label="Play pronunciation"
+          >
+            PLAY
+          </button>
+          <button
+            class="btn accept"
+            id="btn-learn"
+            aria-label="Play explanation"
+          >
+            LEARN
+          </button>
+          <button class="btn next" id="btn-next" aria-label="Next card">
+            NEXT
+          </button>
         </div>
       </div>
     </div>
+    <script src="js/level1.js"></script>
   </body>
 </html>

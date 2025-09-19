@@ -7,80 +7,230 @@ body {
   align-items: center;
   background: url("../Image/BGColors/lvl1BG.png") no-repeat center center fixed;
   background-size: cover;
-  font-family: Arial, sans-serif;
+  font-family: "Poppins", Arial, sans-serif;
 }
 
 /* Container for stacked cards */
 .card-container {
   position: relative;
-  width: 600px;
-  height: 500px;
+  width: 90%;
+  max-width: 600px;
+  height: 80vh;
+  max-height: 500px;
 }
 
 /* Tinder-style card */
 .tinder-card {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  inset: 0;
+  background: linear-gradient(135deg, #c33764, #1d2671);
+  border-radius: 20px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   padding: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Image at top */
+.tinder-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+}
+
 .image-slot {
-  height: calc(30%-200px); /* reduce visible height by 100px */
+  width: 100%;
+  /* keep the slot proportional so content isn't cropped */
+  height: 45%;
   overflow: hidden;
-  transform: scale(0.5);
-  border: 7px solid black;
-  border-top: none;
-  border-left: none;
-  border-right: none;
+  border-radius: 20px 20px 6px 6px; /* subtle bottom rounding */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px; /* small inner padding so glyph doesn't touch edges */
+  box-sizing: border-box;
+  background: rgba(
+    255,
+    255,
+    255,
+    0.03
+  ); /* light layer so glyph reads well on gradient */
 }
 
-.image-slot img {
-  height: auto;
-  object-fit: cover;
-  transform: translateY(30px); /* shifts image up, cropping bottom */
+/* The vowel text (was img before) */
+.vowel {
+  /* make it act like a centered block (works with <h1> or <div> or your <h>) */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+
+  /* responsive size: scales between 48px and 160px depending on viewport */
+  font-family: "Noto Sans Tamil", "Poppins", system-ui, sans-serif;
+  font-weight: 700;
+  font-size: clamp(48px, 10vw, 160px);
+
+  /* make sure the glyph is fully visible and not cut off */
+  line-height: 1;
+  white-space: nowrap;
+
+  /* visual polish */
+  color: #fff;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.45), 0 1px 0 rgba(255, 255, 255, 0.02);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* slight initial scale (subtle zoom-out) and hover zoom (keeps bottom anchored) */
+  transform: scale(0.98);
+  transform-origin: center center;
+  transition: transform 0.35s ease, filter 0.25s ease;
+  filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.25));
 }
 
-/* Action buttons in middle (below image) */
+.image-slot .vowel:hover {
+  transform: scale(1.03);
+  filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.3));
+}
+
+/* If you need the vowel to sit visually lower (closer to bottom) */
+.image-slot.bottom-anchor .vowel {
+  transform-origin: center bottom;
+}
+
+/* Action buttons */
 .actions {
   display: flex;
   justify-content: center;
   gap: 40px;
-  border: 0;
+  margin: 20px 0;
 }
 
+/* ---------- Enhanced button visuals & animations (replace previous .btn rules) ---------- */
+
 .btn {
-  width: 60px;
+  position: relative; /* needed for pseudo-elements */
+  overflow: hidden; /* clip ripple */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 60px;
   height: 60px;
-  font-size: 24px;
+  padding: 0 18px;
+  font-size: 20px;
   border: none;
   border-radius: 50%;
   cursor: pointer;
-  transition: transform 0.2s;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 320ms cubic-bezier(0.2, 0.9, 0.2, 1),
+    box-shadow 320ms cubic-bezier(0.2, 0.9, 0.2, 1), filter 240ms ease;
+  will-change: transform, box-shadow;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
+  color: #fff;
+  z-index: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.06),
+    rgba(255, 255, 255, 0.02)
+  );
 }
 
+/* halo / glow around button (shows on hover) */
+.btn::before {
+  content: "";
+  position: absolute;
+  inset: -8px; /* slightly larger than button */
+  border-radius: inherit;
+  background: radial-gradient(
+      circle at 30% 20%,
+      rgba(255, 255, 255, 0.06),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 70% 80%,
+      rgba(255, 255, 255, 0.03),
+      transparent 30%
+    );
+  filter: blur(8px);
+  opacity: 0;
+  transition: opacity 280ms ease, transform 280ms ease;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* small ripple on press (created by expanding pseudo-element) */
+.btn::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+  transition: transform 520ms cubic-bezier(0.2, 0.9, 0.2, 1), opacity 520ms ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Accept / Reject gradients */
 .reject {
-  background: #ff4d4d;
-  color: white;
+  background: linear-gradient(135deg, #ff6b6b, #ff3b3b);
+  box-shadow: 0 10px 22px rgba(255, 77, 77, 0.18);
 }
 
 .accept {
-  background: #4caf50;
-  color: white;
+  background: linear-gradient(135deg, #5ae29a, #22c55e);
+  box-shadow: 0 10px 22px rgba(76, 175, 80, 0.18);
 }
 
+/* hover: lift + rotate + halo */
 .btn:hover {
-  transform: scale(1.1);
-  background: white;
-  color: blue;
+  transform: translateY(-8px) scale(1.08) rotate(-6deg);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.28);
+  filter: brightness(1.02);
+}
+.btn:hover::before {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* focus-visible for keyboard users (accessible) */
+.btn:focus-visible {
+  outline: 3px solid rgba(255, 255, 255, 0.14);
+  outline-offset: 6px;
+  transform: translateY(-6px) scale(1.06);
+}
+
+/* active (press): quick press animation + ripple expansion */
+.btn:active {
+  transition-duration: 120ms;
+  transform: translateY(-2px) scale(0.98) rotate(-2deg);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.22);
+}
+.btn:active::after {
+  transform: translate(-50%, -50%) scale(8);
+  opacity: 0.18;
+  transition-duration: 420ms;
+}
+
+/* small variant for smaller screens (keeps proportions) */
+@media (max-width: 480px) {
+  .btn {
+    min-width: 48px;
+    height: 48px;
+    font-size: 16px;
+    padding: 0 12px;
+  }
+}
+
+/* Optional decorative class to make one button 'highlighted' (useful for primary action) */
+.btn.primary {
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.32),
+    0 6px 18px rgba(255, 255, 255, 0.02) inset;
+  transform-origin: center;
 }
