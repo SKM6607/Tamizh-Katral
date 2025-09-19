@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="ta">
+  <head>
+    <meta charset="UTF-8" />
+    <title>TSCII → Unicode Converter</title>
+    <link rel="stylesheet" />
+    <style>
+      :root {
+        --bg-light: #f8f9fa;
+        --bg-dark: #1e1e1e;
+        --text-light: #000;
+        --text-dark: #fff;
+        --primary: #6200ea;
+        --secondary: #03dac6;
+        --accent: #ff0266;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Segoe UI", sans-serif;
+        background: var(--bg-light);
+        color: var(--text-light);
+        transition: background 0.3s, color 0.3s;
+      }
+
+      body.dark {
+        background: var(--bg-dark);
+        color: var(--text-dark);
+      }
+
+      /* Top Nav */
+      .top-nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: var(--primary);
+        padding: 10px 20px;
+        color: white;
+      }
+      .top-nav ul {
+        display: flex;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+      .top-nav li {
+        margin-left: 20px;
+      }
+      .top-nav a {
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+      }
+      .top-nav a:hover {
+        color: var(--secondary);
+      }
+
+      /* Layout */
+      .layout {
+        display: flex;
+      }
+
+      /* Side Nav */
+      .side-nav {
+        width: 220px;
+        background: #eee;
+        padding: 15px;
+        min-height: 80vh;
+        transition: background 0.3s;
+      }
+      body.dark .side-nav {
+        background: #2c2c2c;
+      }
+      .side-nav h3 {
+        margin-top: 0;
+      }
+      .side-nav ul {
+        list-style: none;
+        padding: 0;
+      }
+      .side-nav li {
+        margin: 10px 0;
+      }
+      .side-nav a {
+        text-decoration: none;
+        color: inherit;
+        font-weight: bold;
+      }
+      .side-nav a:hover {
+        color: var(--accent);
+      }
+
+      /* Main Content */
+      .content {
+        flex: 1;
+        padding: 20px;
+      }
+      textarea {
+        width: 100%;
+        height: 120px;
+        margin: 10px 0;
+        padding: 10px;
+        font-size: 15px;
+        border-radius: 8px;
+        border: 2px solid var(--primary);
+        resize: vertical;
+        transition: all 0.3s;
+      }
+      textarea:focus {
+        border-color: var(--accent);
+        outline: none;
+      }
+
+      /* Buttons */
+      .btn-group {
+        margin: 15px 0;
+      }
+      .btn {
+        border: none;
+        padding: 10px 18px;
+        margin: 5px;
+        border-radius: 25px;
+        cursor: pointer;
+        font-size: 15px;
+        font-weight: bold;
+        transition: transform 0.2s, background 0.3s;
+      }
+      .btn:hover {
+        transform: scale(1.05);
+        opacity: 0.9;
+      }
+      .convert {
+        background: var(--primary);
+        color: white;
+      }
+      .clear {
+        background: var(--secondary);
+        color: black;
+      }
+      .copy {
+        background: var(--accent);
+        color: white;
+      }
+      .download {
+        background: teal;
+        color: white;
+      }
+      .pdf {
+        background: orange;
+        color: white;
+      }
+
+      /* Bottom Nav */
+      .bottom-nav {
+        display: flex;
+        justify-content: center;
+        background: var(--primary);
+        padding: 10px;
+      }
+      .bottom-nav a {
+        color: white;
+        margin: 0 15px;
+        text-decoration: none;
+        font-weight: bold;
+      }
+      .bottom-nav a:hover {
+        color: var(--secondary);
+      }
+
+      /* Dark Mode Overrides */
+      body.dark textarea {
+        background: #2e2e2e;
+        color: var(--text-dark);
+        border-color: var(--secondary);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Top Navigation Bar -->
+    <nav class="top-nav">
+      <div class="logo">தமிழ் Tools</div>
+      <ul>
+        <li><a href="#">Converter</a></li>
+        <li><a href="#">History</a></li>
+        <li><a href="#">Dictionary</a></li>
+        <li><a href="#">Settings</a></li>
+      </ul>
+      <button class="btn clear" onclick="toggleTheme()">🌙 Theme</button>
+    </nav>
+
+    <div class="layout">
+      <!-- Side Navigation Bar -->
+      <aside class="side-nav">
+        <h3>Features</h3>
+        <ul>
+          <li><a href="#">TSCII → Unicode</a></li>
+          <li><a href="#">Unicode → TSCII</a></li>
+          <li><a href="#">Tamil Font Viewer</a></li>
+          <li><a href="#">Batch Converter</a></li>
+          <li><a href="#">Export Options</a></li>
+          <li><a href="#">Convert PDF</a></li>
+          <!-- New Feature -->
+        </ul>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="content">
+        <h1>TSCII → Unicode Converter</h1>
+        <label for="tsciiInput">TSCII Input</label>
+        <textarea
+          id="tsciiInput"
+          placeholder="Paste TSCII text here..."
+        ></textarea>
+
+        <div class="btn-group">
+          <button id="btn convert">Convert</button>
+          <button id="btn clear">Clear</button>
+          <button id="btn copy">Copy</button>
+          <button id="btn download">Download</button>
+          <button id="btn pdf">Convert PDF</button>
+          <!-- New Button -->
+        </div>
+
+        <label for="unicodeOutput">Unicode Output</label>
+        <textarea
+          id="unicodeOutput"
+          readonly
+          placeholder="Converted Tamil text will appear here..."
+        ></textarea>
+      </main>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+      <a href="#">About</a>
+      <a href="#">Help</a>
+      <a href="#">Contact</a>
+      <a href="#">GitHub</a>
+    </nav>
+
+    <script src="script.js">
+      function toggleTheme() {
+        document.body.classList.toggle("dark");
+      }
+    </script>
+  </body>
+</html>
