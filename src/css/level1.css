@@ -5,7 +5,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: url("../assets/Image/lvl1BG.png") no-repeat center center fixed;
+  background: url("../Image/BGColors/lvl1BG.png") no-repeat center center fixed;
   background-size: cover;
   font-family: Arial, sans-serif;
 }
@@ -13,8 +13,8 @@ body {
 /* Container for stacked cards */
 .card-container {
   position: relative;
-  width: 320px;
-  height: 480px;
+  width: 600px;
+  height: 500px;
 }
 
 /* Tinder-style card */
@@ -35,11 +35,20 @@ body {
 }
 
 /* Image at top */
+.image-slot {
+  height: calc(30%-200px); /* reduce visible height by 100px */
+  overflow: hidden;
+  transform: scale(0.5);
+  border: 7px solid black;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+
 .image-slot img {
-  width: 100%;
-  height: 65%;
+  height: auto;
   object-fit: cover;
-  border-radius: 8px;
+  transform: translateY(30px); /* shifts image up, cropping bottom */
 }
 
 /* Action buttons in middle (below image) */
@@ -47,7 +56,7 @@ body {
   display: flex;
   justify-content: center;
   gap: 40px;
-  margin-top: 20px;
+  border: 0;
 }
 
 .btn {
@@ -72,4 +81,6 @@ body {
 
 .btn:hover {
   transform: scale(1.1);
+  background: white;
+  color: blue;
 }
