@@ -1,0 +1,75 @@
+body {
+  font-family: "Baloo Chettan 2", sans-serif;
+  margin: 0;
+  padding: 20px;
+  background: #f9f9f9;
+  color: #333;
+}
+
+.settings-container {
+  max-width: 400px;
+  margin: auto;
+  padding: 20px;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.settings-title {
+  margin-bottom: 20px;
+}
+
+.settings-section {
+  margin: 20px 0;
+  text-align: left;
+}
+
+.settings-section label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+#volumeControl {
+  width: 100%;
+}
+
+.settings-buttons {
+  margin-top: 20px;
+}
+
+.back-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  background: #4caf50;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.back-button:hover {
+  background: #45a049;
+}
+
+/* Themes */
+body.light {
+  background: #f9f9f9;
+  color: #333;
+}
+
+body.dark {
+  background: #121212;
+  color: #f1f1f1;
+}
+
+body.sunset {
+  background: linear-gradient(to bottom, #ff9a9e, #fad0c4);
+  color: #333;
+}
+
+body.forest {
+  background: linear-gradient(to bottom, #2c7744, #9be15d);
+  color: white;
+}

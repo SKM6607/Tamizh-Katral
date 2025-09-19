@@ -1,0 +1,134 @@
+/* --- Level Select Page Styles --- */
+
+.page-container {
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(to bottom, #87ceeb 0%, #a2dff5 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.header {
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin-bottom: 30px;
+}
+
+.back-button {
+  position: absolute;
+  left: 10px;
+  font-size: 2.5rem;
+  color: white;
+  text-decoration: none;
+  background: rgba(0, 0, 0, 0.1);
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.page-title {
+  font-size: 3rem;
+  color: #ffc300;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.levels-wrapper {
+  width: 100%;
+  max-width: 900px;
+}
+
+.level-card {
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 20px;
+  padding: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 5px solid #f5f5dc;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+  position: relative; /* For the line separator */
+}
+
+/* Thematic Separator Line */
+.level-card:not(:last-child)::after {
+  content: "....................";
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 2rem;
+  color: rgba(255, 255, 255, 0.6);
+  letter-spacing: 5px;
+  font-weight: bold;
+}
+
+.level-info {
+  flex-grow: 1;
+}
+
+.level-title {
+  font-size: 2.5rem;
+  color: #00a5a5;
+  margin: 0;
+}
+
+.level-subtitle {
+  font-size: 1.2rem;
+  color: #333;
+  margin: -5px 0 0 0;
+}
+
+.level-description {
+  font-size: 1.1rem;
+  color: #555;
+  margin: 0 20px;
+}
+
+.level-play-button {
+  width: 80px;
+  height: 80px;
+  background: #228b22;
+  border: none;
+  border-radius: 50%;
+  color: white;
+  font-size: 2.5rem;
+  cursor: pointer;
+  transition: transform 0.2s;
+  flex-shrink: 0;
+}
+
+.level-play-button:hover {
+  transform: scale(1.1);
+}
+
+/* Locked State */
+.level-card.locked {
+  background: rgba(200, 200, 200, 0.7);
+  color: #999;
+}
+
+.level-card.locked .level-title,
+.level-card.locked .level-subtitle,
+.level-card.locked .level-description {
+  color: #888;
+}
+
+.level-card.locked .level-play-button {
+  background: #aaa;
+  cursor: not-allowed;
+}
+
+.level-card.locked .level-play-button:hover {
+  transform: scale(1);
+}

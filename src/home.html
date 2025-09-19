@@ -1,47 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tamizh Katral</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Baloo+Chettan+2:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-</head>
+    <link rel="stylesheet" href="css/home.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo+Chettan+2:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+  </head>
 
-<body>
-
+  <body>
     <div class="game-container">
+      <div class="sky">
+        <div class="cloud cloud1"></div>
+        <div class="cloud cloud2"></div>
+      </div>
+      <div class="hills"></div>
+      <div class="temple"></div>
 
-        <div class="sky">
-            <div class="cloud cloud1"></div>
-            <div class="cloud cloud2"></div>
-        </div>
-        <div class="hills"></div>
-        <div class="temple"></div>
+      <div class="title-container">
+        <h1 class="main-title">தமிழ் கற்றல்</h1>
+        <p class="sub-title">Tamil Payanam</p>
+      </div>
 
-        <div class="title-container">
-            <h1 class="main-title">தமிழ் கற்றல்</h1>
-            <p class="sub-title">Tamil Payanam</p>
-        </div>
+      <div class="play-button-container">
+        <a href="buttonPage.html">
+          <button id="playButton">
+            <i class="fas fa-play"></i>
+          </button>
+        </a>
+      </div>
 
-        <div class="mascot-container">
-            <img src="assets/peacock.png" alt="Mani the Peacock Mascot" id="mascot">
-        </div>
-
-        <div class="play-button-container">
-            <button id="playButton">
-                <i class="fas fa-play"></i>
-            </button>
-        </div>
-
-        <button class="icon-button settings-button" id="settingsButton"><i class="fas fa-cog"></i></button>
-        <button class="icon-button parent-button" id="parentButton"><i class="fas fa-user-friends"></i></button>
-
+      <button class="icon-button settings-button" id="settingsButton">
+        <i class="fas fa-cog"></i>
+      </button>
+      <button class="icon-button parent-button" id="parentButton">
+        <i class="fas fa-user-friends"></i>
+      </button>
     </div>
 
     <script src="script.js"></script>
-</body>
-
+  </body>
 </html>

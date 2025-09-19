@@ -1,0 +1,60 @@
+/* Card base */
+.card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  padding: 20px;
+  text-align: center;
+}
+
+/* Fullscreen layout */
+body {
+  height: 100vh;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  /* Background image */
+  background: url("/Tamizh-Katral/src/assets/Image/lvl1BG.png") no-repeat center
+    center fixed;
+  background-size: cover; /* makes it fill the whole screen */
+  font-family: Arial, sans-serif;
+}
+
+/* Middle card */
+.main-card {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+.image-slot img {
+  max-width: 250px;
+  max-height: 250px;
+  border-radius: 8px;
+}
+
+/* Bottom card */
+.next-card {
+  margin-bottom: 30px;
+}
+
+.next-card a {
+  display: block;
+  padding: 15px 30px;
+  background: #222;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 8px;
+  font-size: 18px;
+  transition: background 0.3s;
+}
+
+.next-card a:hover {
+  background: #444;
+}

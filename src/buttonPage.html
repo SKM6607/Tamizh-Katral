@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Choose a Game - தமிழ் பயணம்</title>
+    <link rel="stylesheet" href="css/buttonpage.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo+Chettan+2:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+  </head>
+
+  <body>
+    <div class="page-container">
+      <div class="header">
+        <a href="home.html" class="back-button"
+          ><i class="fas fa-arrow-left"></i
+        ></a>
+        <h1 class="page-title">Choose a Game</h1>
+      </div>
+
+      <div class="levels-wrapper">
+        <div class="level-card" id="level1">
+          <div class="level-info">
+            <h2 class="level-title">உயிர் எழுத்துக்கள்</h2>
+            <p class="level-subtitle">Vowel Matching</p>
+          </div>
+          <div class="level-description">
+            <p>Match the letters to the pictures!</p>
+          </div>
+          <button
+            class="level-play-button"
+            onclick="window.location.href='level1.html'"
+          >
+            <i class="fas fa-play"></i>
+          </button>
+        </div>
+
+        <div class="level-card locked" id="level2">
+          <div class="level-info">
+            <h2 class="level-title">மெய் எழுத்துக்கள்</h2>
+            <p class="level-subtitle">Consonant Jumble</p>
+          </div>
+          <div class="level-description">
+            <p>Put the letters in the right order!</p>
+          </div>
+          <button class="level-play-button" disabled>
+            <i class="fas fa-lock"></i>
+          </button>
+        </div>
+
+        <div class="level-card locked" id="level3">
+          <div class="level-info">
+            <h2 class="level-title">சொல் வேட்டை</h2>
+            <p class="level-subtitle">Word Hunt</p>
+          </div>
+          <div class="level-description">
+            <p>Find the hidden Tamil words!</p>
+          </div>
+          <button class="level-play-button" disabled>
+            <i class="fas fa-lock"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
