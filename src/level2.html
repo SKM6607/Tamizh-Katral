@@ -1,77 +1,163 @@
 <!DOCTYPE html>
 <html lang="ta">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>தமிழ் கற்றல் — Level 2: ஒலி பொருத்து</title>
-
-    <!-- Playful Tamil font + FontAwesome (from your base) -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Baloo+Chettan+2:wght@700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-    />
-
-    <!-- Level2 stylesheet -->
+    <meta charset="UTF-8" />
+    <title>தமிழ் உயிர் எழுத்துகள் விளையாட்டு - Level 2</title>
     <link rel="stylesheet" href="css/level2.css" />
   </head>
   <body>
-    <div class="game-container">
-      <!-- background motif similar to your home -->
-      <div class="sky">
-        <div class="cloud cloud1"></div>
-        <div class="cloud cloud2"></div>
-      </div>
-      <div class="hills"></div>
-      <div class="temple"></div>
-
-      <!-- Header / Title -->
-      <div class="title-container">
-        <h1 class="main-title">ஒலி - எழுத்து பொருத்து</h1>
-        <p class="sub-title">Level 2 — 13 உயிர் எழுத்துக்கள்</p>
-      </div>
-
-      <!-- Left panel: sound & controls -->
-      <aside class="left-panel">
-        <div class="sound-box">
-          <div id="soundHint" class="sound-hint">🔊</div>
-          <div id="romanLabel" class="roman">—</div>
-          <button id="playSoundBtn" class="play-btn">🔊 ஒலி</button>
-        </div>
-
-        <div class="control-row">
-          <button id="nextBtn" class="control-btn">அடுத்தது</button>
-          <button id="shuffleBtn" class="control-btn ghost">கலக்கு</button>
-          <button id="resetBtn" class="control-btn ghost">மீட்டமை</button>
-        </div>
-
-        <div class="score-area">
-          <div>Round: <span id="roundLabel">0</span></div>
-          <div>Score: <span id="scoreLabel">0</span></div>
-        </div>
-      </aside>
-
-      <!-- Main grid -->
-      <main class="grid" id="grid" aria-label="Vowel choices">
-        <!-- vowel cards will be injected by JS -->
-      </main>
-
-      <!-- Small footer hint -->
-      <footer class="footer">
-        <div class="hint">
-          சரி என்பதைத் தேர்ந்தெடுத்தால் சிறிய பரிசு! தவறானால் மறுபடி முயற்சி
-          செய்.
-        </div>
-      </footer>
+    <div class="topbar">
+      <h1>கேள் & தேர்வு செய் (HEAR AND SELECT)</h1>
+      <div id="progress">Score: <span id="score">0</span>/5</div>
     </div>
 
-    <!-- Confetti canvas -->
-    <canvas id="confetti" class="confetti" aria-hidden="true"></canvas>
+    <div class="stage">
+      <button id="playSound" class="play-btn">ஒலி கேள் (Hear Sound)</button>
+      <div class="options-grid"></div>
+      <div id="result" class="hint"></div>
+    </div>
 
-    <!-- Level2 script -->
-    <script src="level2.js"></script>
+    <!-- Yay overlay for promotion -->
+    <div class="yay-overlay" id="levelUp">
+      <div class="yay-card">
+        <div class="yay-text">🎉 வாழ்த்துக்கள்! 🎉</div>
+        <div class="yay-sub">நீங்கள் Level 3 க்கு முன்னேறுகிறீர்கள்</div>
+      </div>
+    </div>
+
+    <script>
+      const vowels = [
+        {
+          symbol: "அ",
+          key: "a",
+          sound:
+            "https://upload.wikimedia.org/wikipedia/commons/transcoded/5/51/Ta-%E0%AE%85.ogg/Ta-%E0%AE%85.ogg.mp3",
+        },
+        {
+          symbol: "ஆ",
+          key: "aa",
+          sound:
+            "https://upload.wikimedia.org/wikipedia/commons/transcoded/e/e8/Ta-%E0%AE%86.ogg/Ta-%E0%AE%86.ogg.mp3",
+        },
+        {
+          symbol: "இ",
+          key: "i",
+          sound:
+            "https://upload.wikimedia.org/wikipedia/commons/transcoded/c/c8/Ta-%E0%AE%87.ogg/Ta-%E0%AE%87.ogg.mp3",
+        },
+        {
+          symbol: "ஈ",
+          key: "ii",
+          sound:
+            "https://upload.wikimedia.org/wikipedia/commons/transcoded/d/dd/Ta-%E0%AE%88.ogg/Ta-%E0%AE%88.ogg.mp3",
+        },
+        {
+          symbol: "உ",
+          key: "u",
+          sound:
+            "https://upload.wikimedia.org/wikipedia/commons/transcoded/2/24/Ta-%E0%AE%89.ogg/Ta-%E0%AE%89.ogg.mp3",
+        },
+        {
+          symbol: "ஊ",
+          key: "uu",
+          sound:
+            "https://upload.wikimedia.org/wikipedia/commons/transcoded/a/aa/Ta-%E0%AE%8A.ogg/Ta-%E0%AE%8A.ogg.mp3",
+        },
+        {
+          symbol: "எ",
+          key: "e",
+          sound:
+            "https://upload.wikimedia.org/wikipedia/commons/transcoded/6/65/Ta-%E0%AE%8E.ogg/Ta-%E0%AE%8E.ogg.mp3",
+        },
+        {
+          symbol: "ஏ",
+          key: "ee",
+          sound:
+            "https://upload.wikimedia.org/wikipedia/commons/transcoded/a/ab/Ta-%E0%AE%8F.ogg/Ta-%E0%AE%8F.ogg.mp3",
+        },
+        {
+          symbol: "ஐ",
+          key: "ai",
+          sound:
+            "https://upload.wikimedia.org/wikipedia/commons/transcoded/2/20/Ta-%E0%AE%90.ogg/Ta-%E0%AE%90.ogg.mp3",
+        },
+        {
+          symbol: "ஒ",
+          key: "o",
+          sound:
+            "https://upload.wikimedia.org/wikipedia/commons/transcoded/d/d0/Ta-%E0%AE%92.ogg/Ta-%E0%AE%92.ogg.mp3",
+        },
+        {
+          symbol: "ஓ",
+          key: "oo",
+          sound:
+            "https://upload.wikimedia.org/wikipedia/commons/transcoded/1/15/Ta-%E0%AE%93.ogg/Ta-%E0%AE%93.ogg.mp3",
+        },
+        {
+          symbol: "ஔ",
+          key: "au",
+          sound:
+            "https://upload.wikimedia.org/wikipedia/commons/transcoded/5/53/Ta-%E0%AE%94.ogg/Ta-%E0%AE%94.ogg.mp3",
+        },
+        {
+          symbol: "ஃ",
+          key: "aytham",
+          sound:
+            "https://upload.wikimedia.org/wikipedia/commons/transcoded/8/8d/Ta-%E0%AE%83.ogg/Ta-%E0%AE%83.ogg.mp3",
+        },
+      ];
+
+      const yay = new Audio(
+        "https://cdn.pixabay.com/download/audio/2023/03/30/audio_140921_cartoon-yay.mp3?filename=cartoon-yay-140921.mp3"
+      );
+
+      let currentAnswer = null;
+      let score = 0;
+
+      const optionsDiv = document.querySelector(".options-grid");
+      vowels.forEach((v) => {
+        const btn = document.createElement("div");
+        btn.className = "tile";
+        btn.textContent = v.symbol;
+        btn.onclick = () => checkAnswer(v.key, btn);
+        optionsDiv.appendChild(btn);
+      });
+
+      document.getElementById("playSound").addEventListener("click", () => {
+        const random = vowels[Math.floor(Math.random() * vowels.length)];
+        currentAnswer = random.key;
+        const audio = new Audio(random.sound);
+        audio.play();
+      });
+
+      function checkAnswer(selected, tile) {
+        const result = document.getElementById("result");
+        if (selected === currentAnswer) {
+          yay.play();
+          result.textContent = "✅ சரி!";
+          tile.classList.add("correct");
+          setTimeout(() => tile.classList.remove("correct"), 500);
+          score++;
+          document.getElementById("score").textContent = score;
+          currentAnswer = null;
+
+          if (score >= 5) {
+            promoteToLevel3();
+          }
+        } else {
+          result.textContent = "❌ தவறு!";
+          tile.classList.add("wrong");
+          setTimeout(() => tile.classList.remove("wrong"), 500);
+        }
+      }
+
+      function promoteToLevel3() {
+        const overlay = document.getElementById("levelUp");
+        overlay.classList.add("show");
+        setTimeout(() => {
+          window.location.href = "level3.html";
+        }, 2500);
+      }
+    </script>
   </body>
 </html>

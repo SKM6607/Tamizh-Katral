@@ -162,10 +162,6 @@
     const src = item.pron || fallbackPron(i);
     pronAudio.src = src;
     pronAudio.currentTime = 0;
-    pronAudio.play().catch((err) => {
-      showTempNotice("Cannot play pronunciation (file missing?)");
-      console.warn("pron play failed", err);
-    });
     flashAction("playing-pron");
   }
 

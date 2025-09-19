@@ -5,27 +5,82 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Level 1 — Vowels</title>
 
-    <!-- keep your existing stylesheet (unchanged) -->
     <link rel="stylesheet" href="css/level1.css" />
 
-    <!-- small inline styles to help the overlay center when JS toggles it -->
     <style>
-      /* only minimal helper — does not conflict with your file */
-      #proceed-overlay {
-        align-items: center;
+      .top-controls {
+        position: fixed;
+        top: 12px;
+        left: 12px;
+        right: 12px;
+        display: flex;
+        justify-content: space-between;
+        z-index: 999;
+      }
+      .top-controls button {
+        padding: 8px 14px;
+        font-size: 14px;
+        border: none;
+        border-radius: 8px;
+        background: linear-gradient(135deg, #6a11cb, #2575fc);
+        color: #fff;
+        cursor: pointer;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+        transition: transform 0.2s ease, opacity 0.2s ease;
+      }
+      .top-controls button:hover {
+        transform: scale(1.05);
+        opacity: 0.9;
+      }
+
+      /* modal styling */
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 2000;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.6);
         justify-content: center;
+        align-items: center;
+      }
+      .modal-content {
+        background: #fff;
+        padding: 20px;
+        border-radius: 12px;
+        max-width: 400px;
+        text-align: center;
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+      }
+      .modal-content img {
+        width: 100%;
+        border-radius: 8px;
+      }
+      .modal-content button {
+        margin-top: 12px;
+        padding: 6px 12px;
+        border: none;
+        border-radius: 6px;
+        background: #ff4b5c;
+        color: #fff;
+        cursor: pointer;
       }
     </style>
   </head>
   <body>
-    <!-- SINGLE card version: only one .tinder-card on the page -->
+    <div class="top-controls">
+      <button onclick="window.location.href='buttonPage.html'">← Return</button>
+      <button onclick="restartLevel()">⟳ Restart</button>
+    </div>
+
     <div class="card-container" aria-live="polite" aria-atomic="true">
       <div class="tinder-card" role="group" aria-label="Vowel card">
         <div class="image-slot">
           <h1 class="vowel" id="vowel-glyph" aria-hidden="false">அ</h1>
         </div>
 
-        <!-- small progress indicator -->
         <div
           id="progress"
           aria-hidden="true"
@@ -41,26 +96,148 @@
         </div>
 
         <div class="actions" role="toolbar" aria-label="Card actions">
-          <button
-            class="btn reject"
-            id="btn-play"
-            aria-label="Play pronunciation"
-          >
-            PLAY
-          </button>
-          <button
-            class="btn accept"
-            id="btn-learn"
-            aria-label="Play explanation"
-          >
-            LEARN
-          </button>
-          <button class="btn next" id="btn-next" aria-label="Next card">
-            NEXT
-          </button>
+          <button class="btn reject" id="btn-play">PLAY</button>
+          <button class="btn accept" id="btn-learn">LEARN</button>
+          <button class="btn draw" id="btn-draw">DRAW</button>
+          <button class="btn next" id="btn-next">NEXT</button>
         </div>
       </div>
     </div>
+
+    <!-- Modal for GIF -->
+    <div class="modal" id="drawModal">
+      <div class="modal-content">
+        <h3>How to Draw</h3>
+        <img src="assets/draw-vowel.gif" alt="Drawing guide" />
+        <button onclick="closeDrawModal()">Close</button>
+      </div>
+    </div>
+    <script>
+      const letters = [
+        {
+          char: "அ",
+          sound:
+            "https://upload.wikimedia.org/wikipedia/commons/transcoded/5/51/Ta-%E0%AE%85.ogg/Ta-%E0%AE%85.ogg.mp3?download",
+        },
+        {
+          char: "ஆ",
+          sound:
+            "https://upload.wikimedia.org/wikipedia/commons/transcoded/e/e8/Ta-%E0%AE%86.ogg/Ta-%E0%AE%86.ogg.mp3?download",
+        },
+        {
+          char: "இ",
+          sound:
+            "https://upload.wikimedia.org/wikipedia/commons/transcoded/c/c8/Ta-%E0%AE%87.ogg/Ta-%E0%AE%87.ogg.mp3?download",
+        },
+        {
+          char: "ஈ",
+          sound:
+            "https://upload.wikimedia.org/wikipedia/commons/transcoded/d/dd/Ta-%E0%AE%88.ogg/Ta-%E0%AE%88.ogg.mp3?download",
+        },
+        {
+          char: "உ",
+          sound:
+            "https://upload.wikimedia.org/wikipedia/commons/transcoded/2/24/Ta-%E0%AE%89.ogg/Ta-%E0%AE%89.ogg.mp3?download",
+        },
+        {
+          char: "ஊ",
+          sound:
+            "https://upload.wikimedia.org/wikipedia/commons/transcoded/a/aa/Ta-%E0%AE%8A.ogg/Ta-%E0%AE%8A.ogg.mp3?download",
+        },
+        {
+          char: "எ",
+          sound:
+            "https://upload.wikimedia.org/wikipedia/commons/transcoded/6/65/Ta-%E0%AE%8E.ogg/Ta-%E0%AE%8E.ogg.mp3?download",
+        },
+        {
+          char: "ஏ",
+          sound:
+            "https://upload.wikimedia.org/wikipedia/commons/transcoded/a/ab/Ta-%E0%AE%8F.ogg/Ta-%E0%AE%8F.ogg.mp3?download",
+        },
+        {
+          char: "ஐ",
+          sound:
+            "https://upload.wikimedia.org/wikipedia/commons/transcoded/2/20/Ta-%E0%AE%90.ogg/Ta-%E0%AE%90.ogg.mp3?download",
+        },
+        {
+          char: "ஒ",
+          sound:
+            "https://upload.wikimedia.org/wikipedia/commons/transcoded/d/d0/Ta-%E0%AE%92.ogg/Ta-%E0%AE%92.ogg.mp3?download",
+        },
+        {
+          char: "ஓ",
+          sound:
+            "https://upload.wikimedia.org/wikipedia/commons/transcoded/1/15/Ta-%E0%AE%93.ogg/Ta-%E0%AE%93.ogg.mp3?download",
+        },
+        {
+          char: "ஔ",
+          sound:
+            "https://upload.wikimedia.org/wikipedia/commons/transcoded/5/53/Ta-%E0%AE%94.ogg/Ta-%E0%AE%94.ogg.mp3?download",
+        },
+        {
+          char: "ஃ",
+          sound:
+            "https://upload.wikimedia.org/wikipedia/commons/transcoded/0/0f/Ta-%E0%AE%83.ogg/Ta-%E0%AE%83.ogg.mp3?download",
+        },
+      ];
+
+      let currentIndex = 0;
+      const vowelGlyph = document.getElementById("vowel-glyph");
+      const progress = document.getElementById("progress");
+      const playBtn = document.getElementById("btn-play");
+      const learnBtn = document.getElementById("btn-learn");
+      const nextBtn = document.getElementById("btn-next");
+      const drawBtn = document.getElementById("btn-draw");
+      const drawModal = document.getElementById("drawModal");
+      const drawImg = drawModal.querySelector("img");
+      const audio = new Audio();
+
+      function updateCard() {
+        vowelGlyph.textContent = letters[currentIndex].char;
+        progress.textContent = `${currentIndex + 1} / ${letters.length}`;
+      }
+
+      // PLAY → plays sound only when clicked
+      playBtn.addEventListener("click", () => {
+        audio.pause();
+        audio.currentTime = 0;
+        audio.src = letters[currentIndex].sound;
+        audio.play();
+      });
+
+      learnBtn.addEventListener("click", () => {
+        alert("Play LEARN media here...");
+      });
+
+      nextBtn.addEventListener("click", () => {
+        if (currentIndex < letters.length - 1) {
+          currentIndex++;
+          updateCard();
+        } else {
+          alert("🎉 Proceed to next level!");
+        }
+      });
+
+      // DRAW modal with correct GIF
+      function updateGif() {
+        drawImg.src = `Image/GIFS/V${currentIndex + 1}.gif`;
+      }
+      drawBtn.addEventListener("click", () => {
+        updateGif();
+        drawModal.style.display = "flex";
+      });
+      function closeDrawModal() {
+        drawModal.style.display = "none";
+      }
+      window.closeDrawModal = closeDrawModal;
+      window.addEventListener("click", (e) => {
+        if (e.target === drawModal) closeDrawModal();
+      });
+
+      // init
+      updateCard();
+    </script>
+
     <script src="js/level1.js"></script>
   </body>
 </html>
