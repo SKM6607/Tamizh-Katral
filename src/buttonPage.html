@@ -27,11 +27,11 @@
       <div class="levels-wrapper">
         <div class="level-card" id="level1">
           <div class="level-info">
-            <h2 class="level-title">உயிர் எழுத்துக்கள்</h2>
-            <p class="level-subtitle">Vowel Matching</p>
+            <h2 class="level-title">உயிர் கற்றல்</h2>
+            <p class="level-subtitle">Vowel Learning</p>
           </div>
           <div class="level-description">
-            <p>Match the letters to the pictures!</p>
+            <p>Learn the Vowels!</p>
           </div>
           <button
             class="level-play-button"
@@ -43,11 +43,11 @@
 
         <div class="level-card locked" id="level2">
           <div class="level-info">
-            <h2 class="level-title">மெய் எழுத்துக்கள்</h2>
-            <p class="level-subtitle">Consonant Jumble</p>
+            <h2 class="level-title">உயிர் பொருத்துதல்</h2>
+            <p class="level-subtitle">Vowel Match</p>
           </div>
           <div class="level-description">
-            <p>Put the letters in the right order!</p>
+            <p>Match the vowels with the sound provided!</p>
           </div>
           <button class="level-play-button" disabled>
             <i class="fas fa-lock"></i>
@@ -68,5 +68,37 @@
         </div>
       </div>
     </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const levels = [
+          { id: "level1", storage: "level1Completed", next: "level1.html" },
+          { id: "level2", storage: "level2Completed", next: "level2.html" },
+          { id: "level3", storage: "level3Completed", next: "level3.html" },
+        ];
+
+        levels.forEach((lvl, index) => {
+          const card = document.getElementById(lvl.id);
+          const btn = card.querySelector(".level-play-button");
+
+          // unlock previous level
+          if (
+            index === 0 ||
+            localStorage.getItem(levels[index - 1].storage) === "true"
+          ) {
+            card.classList.remove("locked");
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fas fa-play"></i>';
+            // redirect to level page
+            btn.onclick = () => {
+              window.location.href = lvl.next;
+            };
+          } else {
+            card.classList.add("locked");
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-lock"></i>';
+          }
+        });
+      });
+    </script>
   </body>
 </html>

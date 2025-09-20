@@ -155,9 +155,11 @@
         const overlay = document.getElementById("levelUp");
         overlay.classList.add("show");
         setTimeout(() => {
-          window.location.href = "level3.html";
+          localStorage.setItem("level2Completed", "true");
+          window.location.href = "buttonPage.html";
         }, 2500);
       }
     </script>
+    <script src="js/level1.js"></script>
   </body>
 </html>

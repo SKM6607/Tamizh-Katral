@@ -1,344 +1,163 @@
-// level1_single.js
 (() => {
-  /* ====== CONFIG: update these paths/audio names if needed ====== */
-  const vowels = [
+  const learnData = {
+    அ: ["அறம் செய்ய விரும்பு", "Intend to do the right deeds."],
+    ஆ: ["ஆறுவது சினம்", "The nature of anger is to subside."],
+    இ: ["இயல்வது கரவேல்", "Help others as much as you can."],
+    ஈ: ["ஈவது விலக்கேல்", "Do not stop charitable deeds."],
+    உ: ["உடையது விளம்பேல்", "Do not brag about possessions."],
+    ஊ: ["ஊக்கமது கைவிடேல்", "Never lose hope."],
+    எ: ["எண் எழுத்து இகழேல்", "Do not despise numbers and letters."],
+    ஏ: ["ஏற்பது இகழ்ச்சி", "Do not beg."],
+    ஐ: ["ஐயமிட்டு உண்", "Eat after offering alms."],
+    ஒ: ["ஒப்புரவு ஒழுகு", "Adapt to your world."],
+    ஓ: ["ஓதுவது ஒழியேல்", "Never stop learning."],
+    ஔ: ["ஒளவியம் பேசேல்", "Do not gossip."],
+    ஃ: ["ஃகஞ் சுருக்கேல்", "Do not hinder creativity."],
+  };
+
+  const letters = [
     {
-      glyph: "அ",
-      pron: "media/pronunciation/card1.mp3",
-      learn: "media/learn/card1.mp3",
+      char: "அ",
+      sound:
+        "https://upload.wikimedia.org/wikipedia/commons/transcoded/5/51/Ta-%E0%AE%85.ogg/Ta-%E0%AE%85.ogg.mp3",
     },
     {
-      glyph: "ஆ",
-      pron: "media/pronunciation/card2.mp3",
-      learn: "media/learn/card2.mp3",
+      char: "ஆ",
+      sound:
+        "https://upload.wikimedia.org/wikipedia/commons/transcoded/e/e8/Ta-%E0%AE%86.ogg/Ta-%E0%AE%86.ogg.mp3",
     },
     {
-      glyph: "இ",
-      pron: "media/pronunciation/card3.mp3",
-      learn: "media/learn/card3.mp3",
+      char: "இ",
+      sound:
+        "https://upload.wikimedia.org/wikipedia/commons/transcoded/c/c8/Ta-%E0%AE%87.ogg/Ta-%E0%AE%87.ogg.mp3",
     },
     {
-      glyph: "ஈ",
-      pron: "media/pronunciation/card4.mp3",
-      learn: "media/learn/card4.mp3",
+      char: "ஈ",
+      sound:
+        "https://upload.wikimedia.org/wikipedia/commons/transcoded/d/dd/Ta-%E0%AE%88.ogg/Ta-%E0%AE%88.ogg.mp3",
     },
     {
-      glyph: "உ",
-      pron: "media/pronunciation/card5.mp3",
-      learn: "media/learn/card5.mp3",
+      char: "உ",
+      sound:
+        "https://upload.wikimedia.org/wikipedia/commons/transcoded/2/24/Ta-%E0%AE%89.ogg/Ta-%E0%AE%89.ogg.mp3?download",
     },
     {
-      glyph: "ஊ",
-      pron: "media/pronunciation/card6.mp3",
-      learn: "media/learn/card6.mp3",
+      char: "ஊ",
+      sound:
+        "https://upload.wikimedia.org/wikipedia/commons/transcoded/a/aa/Ta-%E0%AE%8A.ogg/Ta-%E0%AE%8A.ogg.mp3?download",
     },
     {
-      glyph: "எ",
-      pron: "media/pronunciation/card7.mp3",
-      learn: "media/learn/card7.mp3",
+      char: "எ",
+      sound:
+        "https://upload.wikimedia.org/wikipedia/commons/transcoded/6/65/Ta-%E0%AE%8E.ogg/Ta-%E0%AE%8E.ogg.mp3?download",
     },
     {
-      glyph: "ஏ",
-      pron: "media/pronunciation/card8.mp3",
-      learn: "media/learn/card8.mp3",
+      char: "ஏ",
+      sound:
+        "https://upload.wikimedia.org/wikipedia/commons/transcoded/a/ab/Ta-%E0%AE%8F.ogg/Ta-%E0%AE%8F.ogg.mp3?download",
     },
     {
-      glyph: "ஐ",
-      pron: "media/pronunciation/card9.mp3",
-      learn: "media/learn/card9.mp3",
+      char: "ஐ",
+      sound:
+        "https://upload.wikimedia.org/wikipedia/commons/transcoded/2/20/Ta-%E0%AE%90.ogg/Ta-%E0%AE%90.ogg.mp3?download",
     },
     {
-      glyph: "ஒ",
-      pron: "media/pronunciation/card10.mp3",
-      learn: "media/learn/card10.mp3",
+      char: "ஒ",
+      sound:
+        "https://upload.wikimedia.org/wikipedia/commons/transcoded/d/d0/Ta-%E0%AE%92.ogg/Ta-%E0%AE%92.ogg.mp3?download",
     },
     {
-      glyph: "ஓ",
-      pron: "media/pronunciation/card11.mp3",
-      learn: "media/learn/card11.mp3",
+      char: "ஓ",
+      sound:
+        "https://upload.wikimedia.org/wikipedia/commons/transcoded/1/15/Ta-%E0%AE%93.ogg/Ta-%E0%AE%93.ogg.mp3?download",
     },
     {
-      glyph: "ஔ",
-      pron: "media/pronunciation/card12.mp3",
-      learn: "media/learn/card12.mp3",
+      char: "ஔ",
+      sound:
+        "https://upload.wikimedia.org/wikipedia/commons/transcoded/5/53/Ta-%E0%AE%94.ogg/Ta-%E0%AE%94.ogg.mp3?download",
     },
     {
-      glyph: "ஃ",
-      pron: "media/pronunciation/card13.mp3",
-      learn: "media/learn/card13.mp3",
+      char: "ஃ",
+      sound:
+        "https://upload.wikimedia.org/wikipedia/commons/transcoded/0/0f/Ta-%E0%AE%83.ogg/Ta-%E0%AE%83.ogg.mp3?download",
     },
   ];
 
-  const TOTAL = vowels.length;
-  let index = 0;
+  let currentIndex = 0;
 
-  // DOM refs
-  const glyphEl = document.getElementById("vowel-glyph");
-  const progressEl = document.getElementById("progress");
+  // refs
+  const vowelGlyph = document.getElementById("vowel-glyph");
+  const progress = document.getElementById("progress");
   const playBtn = document.getElementById("btn-play");
   const learnBtn = document.getElementById("btn-learn");
   const nextBtn = document.getElementById("btn-next");
+  const drawBtn = document.getElementById("btn-draw");
+  const restartBtn = document.getElementById("btn-restart");
 
-  // audio players (re-used)
-  const pronAudio = new Audio();
-  const learnAudio = new Audio();
+  const learnModal = document.getElementById("learnModal");
+  const learnChar = document.getElementById("learnChar");
+  const learnTamil = document.getElementById("learnTamil");
+  const learnEnglish = document.getElementById("learnEnglish");
+  const closeLearn = document.getElementById("closeLearn");
 
-  // proceed overlay creation (keeps same style behavior as prior script)
-  const proceedOverlay = createProceedOverlay();
-  document.body.appendChild(proceedOverlay);
+  const drawModal = document.getElementById("drawModal");
+  const drawImg = drawModal.querySelector("img");
+  const closeDraw = document.getElementById("closeDraw");
 
-  // init
-  renderCurrent();
+  const audio = new Audio();
 
-  // event wiring
-  playBtn.addEventListener("click", () => playPron(index));
-  learnBtn.addEventListener("click", () => playLearn(index));
-  nextBtn.addEventListener("click", goNext);
+  function updateCard() {
+    vowelGlyph.textContent = letters[currentIndex].char;
+    progress.textContent = `${currentIndex + 1} / ${letters.length}`;
+  }
 
-  // keyboard shortcuts
-  window.addEventListener("keydown", (e) => {
-    const tag = document.activeElement && document.activeElement.tagName;
-    if (
-      tag === "INPUT" ||
-      tag === "TEXTAREA" ||
-      document.activeElement.isContentEditable
-    )
-      return;
+  // play sound
+  playBtn.addEventListener("click", () => {
+    audio.pause();
+    audio.currentTime = 0;
+    audio.src = letters[currentIndex].sound;
+    audio.play();
+  });
 
-    if (e.code === "Space") {
-      e.preventDefault();
-      playPron(index);
-    } else if (e.code === "ArrowRight") {
-      e.preventDefault();
-      goNext();
-    } else if (e.code === "ArrowLeft") {
-      e.preventDefault();
-      // go back
-      if (index > 0) {
-        index--;
-        stopAllAudio();
-        renderCurrent(true);
-      }
+  // learn
+  learnBtn.addEventListener("click", () => {
+    const ch = letters[currentIndex].char;
+    const [tamil, english] = learnData[ch] || ["", ""];
+    learnChar.textContent = ch;
+    learnTamil.textContent = tamil;
+    learnEnglish.textContent = english;
+    learnModal.style.display = "flex";
+  });
+  closeLearn.addEventListener(
+    "click",
+    () => (learnModal.style.display = "none")
+  );
+
+  // draw
+  drawBtn.addEventListener("click", () => {
+    drawImg.src = `Image/GIFS/V${currentIndex + 1}.gif`;
+    drawModal.style.display = "flex";
+  });
+  closeDraw.addEventListener("click", () => (drawModal.style.display = "none"));
+
+  // next
+  nextBtn.addEventListener("click", () => {
+    if (currentIndex < letters.length - 1) {
+      currentIndex++;
+      updateCard();
+      console.log("NEXT");
+    } else {
+      localStorage.setItem("level1Completed", "true");
+      window.location.href = "buttonPage.html";
     }
   });
 
-  // functions
-  function renderCurrent(animate = false) {
-    const item = vowels[index];
-    if (!item) return;
+  // restart
+  restartBtn.addEventListener("click", () => {
+    currentIndex = 0;
+    updateCard();
+  });
 
-    // update glyph and progress
-    glyphEl.textContent = item.glyph;
-    progressEl.textContent = `${index + 1} / ${TOTAL}`;
-
-    // small animation (fade/scale)
-    if (animate) {
-      glyphEl.style.transition =
-        "transform .28s cubic-bezier(.2,.9,.2,1), opacity .28s";
-      glyphEl.style.transform = "scale(.92)";
-      glyphEl.style.opacity = "0.28";
-      requestAnimationFrame(() => {
-        setTimeout(() => {
-          glyphEl.style.transform = "";
-          glyphEl.style.opacity = "";
-        }, 10);
-      });
-    }
-
-    // update aria-label for the card
-    const card = document.querySelector(".tinder-card");
-    if (card) {
-      card.setAttribute(
-        "aria-label",
-        `Card ${index + 1} of ${TOTAL}: ${item.glyph}`
-      );
-    }
-  }
-
-  function playPron(i) {
-    const item = vowels[i];
-    if (!item) return;
-    stopAllAudio();
-    const src = item.pron || fallbackPron(i);
-    pronAudio.src = src;
-    pronAudio.currentTime = 0;
-    flashAction("playing-pron");
-  }
-
-  function playLearn(i) {
-    const item = vowels[i];
-    if (!item) return;
-    stopAllAudio();
-    const src = item.learn || fallbackLearn(i);
-    learnAudio.src = src;
-    learnAudio.currentTime = 0;
-    learnAudio.play().catch((err) => {
-      showTempNotice("Cannot play lesson (file missing?)");
-      console.warn("learn play failed", err);
-    });
-    flashAction("playing-learn");
-  }
-
-  function goNext() {
-    stopAllAudio();
-    index++;
-    if (index >= TOTAL) {
-      // show proceed screen
-      showProceedOverlay();
-      return;
-    }
-    renderCurrent(true);
-  }
-
-  function stopAllAudio() {
-    try {
-      pronAudio.pause();
-      pronAudio.currentTime = 0;
-    } catch (e) {}
-    try {
-      learnAudio.pause();
-      learnAudio.currentTime = 0;
-    } catch (e) {}
-  }
-
-  function fallbackPron(i) {
-    return `media/pronunciation/card${i + 1}.mp3`;
-  }
-  function fallbackLearn(i) {
-    return `media/learn/card${i + 1}.mp3`;
-  }
-
-  function flashAction(cls) {
-    const c = document.querySelector(".tinder-card");
-    if (!c) return;
-    c.classList.add(cls);
-    setTimeout(() => c.classList.remove(cls), 700);
-  }
-
-  // small transient UI toast (non-blocking)
-  function showTempNotice(msg, ms = 1200) {
-    let t = document.getElementById("inline-toast");
-    if (!t) {
-      t = document.createElement("div");
-      t.id = "inline-toast";
-      Object.assign(t.style, {
-        position: "fixed",
-        left: "50%",
-        bottom: "40px",
-        transform: "translateX(-50%)",
-        background: "rgba(0,0,0,0.7)",
-        color: "#fff",
-        padding: "10px 14px",
-        borderRadius: "10px",
-        zIndex: 10000,
-        fontSize: "14px",
-      });
-      document.body.appendChild(t);
-    }
-    t.textContent = msg;
-    t.style.opacity = "1";
-    clearTimeout(t._hideTimer);
-    t._hideTimer = setTimeout(() => {
-      t.style.opacity = "0";
-    }, ms);
-  }
-
-  // proceed overlay (same as previous behavior)
-  function createProceedOverlay() {
-    const overlay = document.createElement("div");
-    overlay.id = "proceed-overlay";
-    Object.assign(overlay.style, {
-      position: "fixed",
-      inset: "0",
-      display: "none",
-      zIndex: "9999",
-      background: "rgba(0,0,0,0.6)",
-      justifyContent: "center",
-      alignItems: "center",
-    });
-
-    const box = document.createElement("div");
-    Object.assign(box.style, {
-      background: "linear-gradient(180deg,#fff,#f1f1f1)",
-      padding: "24px",
-      borderRadius: "12px",
-      boxShadow: "0 10px 30px rgba(0,0,0,0.3)",
-      textAlign: "center",
-      minWidth: "260px",
-    });
-
-    const h = document.createElement("h2");
-    h.textContent = "Level Complete!";
-    h.style.margin = "0 0 8px";
-
-    const p = document.createElement("p");
-    p.textContent = "Great job — proceed to the next level.";
-    p.style.margin = "0 0 12px";
-
-    const proceedBtn = document.createElement("button");
-    proceedBtn.textContent = "Proceed to Next Level";
-    Object.assign(proceedBtn.style, {
-      padding: "10px 14px",
-      borderRadius: "8px",
-      border: "none",
-      background: "#1d2671",
-      color: "#fff",
-      cursor: "pointer",
-    });
-    proceedBtn.addEventListener("click", () => {
-      window.location.href = "level2.html";
-    });
-
-    const replayBtn = document.createElement("button");
-    replayBtn.textContent = "Replay Level";
-    Object.assign(replayBtn.style, {
-      marginLeft: "10px",
-      padding: "10px 14px",
-      borderRadius: "8px",
-      border: "none",
-      background: "#4caf50",
-      color: "#fff",
-      cursor: "pointer",
-    });
-    replayBtn.addEventListener("click", () => {
-      hideProceedOverlay();
-      index = 0;
-      renderCurrent(true);
-    });
-
-    box.appendChild(h);
-    box.appendChild(p);
-    box.appendChild(proceedBtn);
-    box.appendChild(replayBtn);
-    overlay.appendChild(box);
-    overlay.hidden = true;
-    return overlay;
-  }
-
-  function showProceedOverlay() {
-    proceedOverlay.hidden = false;
-    proceedOverlay.style.display = "flex";
-  }
-  function hideProceedOverlay() {
-    proceedOverlay.hidden = true;
-    proceedOverlay.style.display = "none";
-  }
-
-  // expose simple API on window for debugging/dev (optional)
-  window.LVL1 = {
-    goNext: goNext,
-    playPron: () => playPron(index),
-    playLearn: () => playLearn(index),
-    restart: () => {
-      index = 0;
-      renderCurrent(true);
-    },
-    getIndex: () => index,
-    setIndex: (i) => {
-      if (i >= 0 && i < TOTAL) {
-        index = i;
-        renderCurrent(true);
-      }
-    },
-  };
+  // init
+  updateCard();
 })();
