@@ -5,9 +5,9 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: url("../Image/BGColors/lvl1BG.png") no-repeat center center fixed;
-  background-size: cover;
+  background: linear-gradient(#42a5f5, #5ae29a);
   font-family: "Poppins", Arial, sans-serif;
+  overflow: hidden;
 }
 
 /* Container for stacked cards */
@@ -17,13 +17,16 @@ body {
   max-width: 600px;
   height: 80vh;
   max-height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Tinder-style card */
 .tinder-card {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, #c33764, #1d2671);
+  background: linear-gradient(135deg, #624dbfcc, #29a2d2cc);
   border-radius: 20px;
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
   display: flex;
@@ -32,6 +35,8 @@ body {
   align-items: center;
   padding: 20px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  backdrop-filter: blur(5px);
+  background-color: whitesmoke;
 }
 
 .tinder-card:hover {
@@ -39,50 +44,36 @@ body {
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
 }
 
+/* Image slot */
 .image-slot {
   width: 100%;
-  /* keep the slot proportional so content isn't cropped */
   height: 45%;
   overflow: hidden;
-  border-radius: 20px 20px 6px 6px; /* subtle bottom rounding */
+  border-radius: 20px 20px 6px 6px;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 8px; /* small inner padding so glyph doesn't touch edges */
+  padding: 8px;
   box-sizing: border-box;
-  background: rgba(
-    255,
-    255,
-    255,
-    0.03
-  ); /* light layer so glyph reads well on gradient */
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(3px);
 }
 
-/* The vowel text (was img before) */
+/* Vowel text */
 .vowel {
-  /* make it act like a centered block (works with <h1> or <div> or your <h>) */
   display: inline-flex;
   align-items: center;
   justify-content: center;
   margin: 0;
   padding: 0;
-
-  /* responsive size: scales between 48px and 160px depending on viewport */
   font-family: "Noto Sans Tamil", "Poppins", system-ui, sans-serif;
   font-weight: 700;
   font-size: clamp(48px, 10vw, 160px);
-
-  /* make sure the glyph is fully visible and not cut off */
   line-height: 1;
   white-space: nowrap;
-
-  /* visual polish */
   color: #fff;
   text-shadow: 0 2px 12px rgba(0, 0, 0, 0.45), 0 1px 0 rgba(255, 255, 255, 0.02);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-  /* slight initial scale (subtle zoom-out) and hover zoom (keeps bottom anchored) */
   transform: scale(0.98);
   transform-origin: center center;
   transition: transform 0.35s ease, filter 0.25s ease;
@@ -94,39 +85,29 @@ body {
   filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.3));
 }
 
-/* If you need the vowel to sit visually lower (closer to bottom) */
-.image-slot.bottom-anchor .vowel {
-  transform-origin: center bottom;
-}
-
-/* Action buttons */
+/* Actions buttons container */
 .actions {
   display: flex;
   justify-content: center;
-  gap: 40px;
+  gap: 30px;
   margin: 20px 0;
 }
 
-/* ---------- Enhanced button visuals & animations (replace previous .btn rules) ---------- */
-
+/* Buttons */
 .btn {
-  position: relative; /* needed for pseudo-elements */
-  overflow: hidden; /* clip ripple */
+  position: relative;
+  overflow: hidden;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   min-width: 60px;
   height: 60px;
-  padding: 0 18px;
   font-size: 20px;
   border: none;
   border-radius: 50%;
   cursor: pointer;
-  user-select: none;
-  -webkit-tap-highlight-color: transparent;
   transition: transform 320ms cubic-bezier(0.2, 0.9, 0.2, 1),
     box-shadow 320ms cubic-bezier(0.2, 0.9, 0.2, 1), filter 240ms ease;
-  will-change: transform, box-shadow;
   box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
   color: #fff;
   z-index: 0;
@@ -137,11 +118,10 @@ body {
   );
 }
 
-/* halo / glow around button (shows on hover) */
 .btn::before {
   content: "";
   position: absolute;
-  inset: -8px; /* slightly larger than button */
+  inset: -8px;
   border-radius: inherit;
   background: radial-gradient(
       circle at 30% 20%,
@@ -160,7 +140,6 @@ body {
   z-index: -1;
 }
 
-/* small ripple on press (created by expanding pseudo-element) */
 .btn::after {
   content: "";
   position: absolute;
@@ -177,7 +156,6 @@ body {
   z-index: 0;
 }
 
-/* Accept / Reject gradients */
 .reject {
   background: linear-gradient(135deg, #ff6b6b, #ff3b3b);
   box-shadow: 0 10px 22px rgba(255, 77, 77, 0.18);
@@ -188,49 +166,127 @@ body {
   box-shadow: 0 10px 22px rgba(76, 175, 80, 0.18);
 }
 
-/* hover: lift + rotate + halo */
+.draw {
+  background: linear-gradient(135deg, #fbc02d, #f9a825);
+  box-shadow: 0 10px 22px rgba(255, 193, 7, 0.18);
+}
+
+.next {
+  background: linear-gradient(135deg, #42a5f5, #1e88e5);
+  box-shadow: 0 10px 22px rgba(30, 136, 229, 0.18);
+}
+
 .btn:hover {
   transform: translateY(-8px) scale(1.08) rotate(-6deg);
   box-shadow: 0 16px 36px rgba(0, 0, 0, 0.28);
   filter: brightness(1.02);
 }
+
 .btn:hover::before {
   opacity: 1;
   transform: scale(1);
 }
 
-/* focus-visible for keyboard users (accessible) */
-.btn:focus-visible {
-  outline: 3px solid rgba(255, 255, 255, 0.14);
-  outline-offset: 6px;
-  transform: translateY(-6px) scale(1.06);
-}
-
-/* active (press): quick press animation + ripple expansion */
 .btn:active {
   transition-duration: 120ms;
   transform: translateY(-2px) scale(0.98) rotate(-2deg);
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.22);
 }
+
 .btn:active::after {
   transform: translate(-50%, -50%) scale(8);
   opacity: 0.18;
   transition-duration: 420ms;
 }
 
-/* small variant for smaller screens (keeps proportions) */
 @media (max-width: 480px) {
   .btn {
     min-width: 48px;
     height: 48px;
     font-size: 16px;
-    padding: 0 12px;
   }
 }
 
-/* Optional decorative class to make one button 'highlighted' (useful for primary action) */
-.btn.primary {
-  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.32),
-    0 6px 18px rgba(255, 255, 255, 0.02) inset;
-  transform-origin: center;
+/* Top Controls */
+.top-controls {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  right: 12px;
+  display: flex;
+  justify-content: space-between;
+  z-index: 999;
+}
+
+.top-controls button {
+  padding: 8px 14px;
+  font-size: 14px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.top-controls button:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
+
+/* Modal styling */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 2000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.3s ease forwards;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  max-width: 420px;
+  text-align: center;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+.modal-content h2,
+.modal-content h3 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+  color: #2563eb;
+}
+
+.modal-content p {
+  margin: 8px 0;
+  font-size: 1rem;
+  color: #333;
+}
+
+.modal-content button {
+  margin-top: 14px;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  background: #ff4b5c;
+  color: #fff;
+  cursor: pointer;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }

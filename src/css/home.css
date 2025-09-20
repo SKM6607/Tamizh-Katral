@@ -1,194 +1,183 @@
-/* Basic Setup */
+/* Reset & Base */
 body,
 html {
   margin: 0;
   padding: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
   font-family: "Baloo Chettan 2", cursive;
-  background: #87ceeb; /* Fallback color */
+  background: linear-gradient(135deg, #a2dff5 0%, #f5f5dc 100%);
+  overflow: hidden;
 }
 
-/* Main Game Container */
-.game-container {
+/* Animated Background */
+.bg-anim {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Temple Overlay */
+.temple-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: url("Imageassets/gopuram.png") center center/cover no-repeat;
+  opacity: 0.25;
+  filter: drop-shadow(0 0 60px #ffc300);
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Clouds */
+.cloud {
+  position: absolute;
+  background: #fff;
+  opacity: 0.7;
+  border-radius: 50%;
+  filter: blur(1px);
+  animation: cloudMove 40s linear infinite;
+}
+.cloud1 {
+  width: 120px;
+  height: 40px;
+  top: 10%;
+  left: 5%;
+  animation-delay: 0s;
+}
+.cloud2 {
+  width: 180px;
+  height: 60px;
+  top: 18%;
+  left: 60%;
+  animation-delay: 10s;
+}
+.cloud3 {
+  width: 90px;
+  height: 30px;
+  top: 25%;
+  left: 30%;
+  animation-delay: 20s;
+}
+
+@keyframes cloudMove {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(60vw);
+  }
+}
+
+/* Sun */
+.sun {
+  position: absolute;
+  top: 8%;
+  left: 80%;
+  width: 110px;
+  height: 110px;
+  background: radial-gradient(circle, #ffd700 60%, #ffb700 100%);
+  border-radius: 50%;
+  box-shadow: 0 0 80px 30px #ffd70088;
+  z-index: 1;
+}
+
+/* Main Container */
+.home-main {
   position: relative;
-  width: 100%;
-  height: 100%;
+  z-index: 10;
+  width: 100vw;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-/* Background Scenery */
-.sky {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(to bottom, #87ceeb 0%, #a2dff5 70%);
-  z-index: 1;
-}
-
-.hills {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 35%;
-  background: #228b22;
-  border-top-left-radius: 100% 80%;
-  border-top-right-radius: 100% 120%;
-  z-index: 2;
-}
-
-/* Placeholder for the temple image */
-.temple {
-  position: absolute;
-  bottom: 25%;
-  right: 10%;
-  width: 150px;
-  height: 200px;
-  background-image: url("assets/gopuram.png"); /* Add your gopuram image here! */
-  background-size: contain;
-  background-repeat: no-repeat;
-  z-index: 3;
-}
-
-.cloud {
-  position: absolute;
-  background: #f5f5dc;
-  border-radius: 50%;
-  opacity: 0.9;
-}
-.cloud::before,
-.cloud::after {
-  content: "";
-  position: absolute;
-  background: #f5f5dc;
-  border-radius: 50%;
-}
-.cloud1 {
-  width: 100px;
-  height: 30px;
-  top: 15%;
-  animation: drift 25s linear infinite;
-}
-.cloud1::before {
-  width: 40px;
-  height: 40px;
-  top: -20px;
-  left: 15px;
-}
-.cloud1::after {
-  width: 50px;
-  height: 50px;
-  top: -15px;
-  right: 10px;
-}
-.cloud2 {
-  width: 150px;
-  height: 45px;
-  top: 25%;
-  animation: drift 35s linear infinite reverse;
-}
-.cloud2::before {
-  width: 60px;
-  height: 60px;
-  top: -30px;
-  left: 25px;
-}
-.cloud2::after {
-  width: 75px;
-  height: 75px;
-  top: -25px;
-  right: 20px;
-}
-
-@keyframes drift {
-  from {
-    left: -200px;
-  }
-  to {
-    left: 110%;
-  }
-}
-
-/* Title Styling */
-.title-container {
-  position: relative;
-  z-index: 10;
-  text-align: center;
+/* Title */
+.title {
+  font-size: 4rem;
   color: #ffc300;
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-  margin-bottom: 20px;
+  text-shadow: 0 4px 24px #0006, 0 1px 0 #fff;
+  margin-bottom: 0.5rem;
+  animation: glowTitle 2s infinite alternate;
 }
-.main-title {
-  font-size: 5rem;
-  margin: 0;
-}
-.sub-title {
-  font-size: 1.5rem;
-  margin: -10px 0 0 0;
-  color: #f5f5dc;
+@keyframes glowTitle {
+  0% {
+    text-shadow: 0 4px 24px #0006, 0 1px 0 #fff;
+  }
+  100% {
+    text-shadow: 0 8px 40px #ffc300, 0 1px 0 #fff;
+  }
 }
 
-@keyframes gentleBob {
+.subtitle {
+  font-size: 1.5rem;
+  color: #fffbe6;
+  margin-bottom: 2rem;
+  text-shadow: 0 2px 8px #ffc30055;
+}
+
+/* Play Button */
+.play-btn {
+  width: 140px;
+  height: 140px;
+  background: linear-gradient(135deg, #228b22 60%, #279f27 100%);
+  border: none;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 3rem;
+  font-weight: bold;
+  box-shadow: 0 10px 40px #228b2288;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  animation: bounceBtn 2s infinite;
+}
+.play-btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 20px 60px #279f2788;
+}
+@keyframes bounceBtn {
   0%,
   100% {
     transform: translateY(0);
   }
   50% {
-    transform: translateY(-15px);
+    transform: translateY(-12px);
   }
 }
 
-/* Play Button Styling */
-.play-button-container {
-  position: relative;
+/* Footer */
+.footer {
+  position: absolute;
+  bottom: 18px;
+  left: 0;
+  width: 100vw;
+  text-align: center;
+  color: #228b22;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+  text-shadow: 0 1px 6px #fff;
   z-index: 10;
-  margin-top: 20px;
-}
-#playButton {
-  width: 120px;
-  height: 120px;
-  background: #228b22;
-  border: 5px solid white;
-  border-radius: 50%; /* Simple circle button */
-  color: white;
-  font-size: 3rem;
-  cursor: pointer;
-  transition: transform 0.1s ease-in-out, background-color 0.2s;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-}
-#playButton:hover {
-  background-color: #279f27;
-}
-#playButton.clicked {
-  transform: scale(0.9);
 }
 
-/* Corner Icon Buttons */
-.icon-button {
-  position: absolute;
-  z-index: 20;
-  width: 60px;
-  height: 60px;
-  background: rgba(255, 255, 255, 0.5);
-  border: none;
-  border-radius: 50%;
-  color: #00a5a5;
-  font-size: 1.8rem;
-  cursor: pointer;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-}
-.settings-button {
-  bottom: 20px;
-  left: 20px;
-}
-.parent-button {
-  bottom: 20px;
-  right: 20px;
+/* Responsive */
+@media (max-width: 600px) {
+  .title {
+    font-size: 2.2rem;
+  }
+  .subtitle {
+    font-size: 1rem;
+  }
+  .play-btn {
+    width: 90px;
+    height: 90px;
+    font-size: 2rem;
+  }
 }

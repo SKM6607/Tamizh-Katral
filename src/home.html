@@ -1,50 +1,70 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ta">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Tamizh Katral</title>
     <link rel="stylesheet" href="css/home.css" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Baloo+Chettan+2:wght@700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-    />
   </head>
-
   <body>
-    <div class="game-container">
-      <div class="sky">
-        <div class="cloud cloud1"></div>
-        <div class="cloud cloud2"></div>
-      </div>
-      <div class="hills"></div>
-      <div class="temple"></div>
+    <!-- Animated background canvas (optional, for extra effects) -->
+    <canvas id="bgCanvas" class="bg-anim"></canvas>
 
-      <div class="title-container">
-        <h1 class="main-title">தமிழ் கற்றல்</h1>
-        <p class="sub-title">Tamil Payanam</p>
-      </div>
+    <!-- Temple overlay -->
+    <div class="temple-overlay"></div>
 
-      <div class="play-button-container">
-        <a href="buttonPage.html">
-          <button id="playButton">
-            <i class="fas fa-play"></i>
-          </button>
-        </a>
-      </div>
+    <!-- Clouds -->
+    <div class="cloud cloud1"></div>
+    <div class="cloud cloud2"></div>
+    <div class="cloud cloud3"></div>
 
-      <button class="icon-button settings-button" id="settingsButton">
-        <i class="fas fa-cog"></i>
+    <!-- Sun -->
+    <div class="sun"></div>
+
+    <!-- Main content -->
+    <main class="home-main">
+      <div class="title">தமிழ் கற்றல்</div>
+      <div class="subtitle">குழந்தைகளுக்கான தமிழ் பயிற்சி</div>
+      <button class="play-btn" onclick="window.location.href='buttonPage.html'">
+        ▶
       </button>
-      <button class="icon-button parent-button" id="parentButton">
-        <i class="fas fa-user-friends"></i>
-      </button>
-    </div>
+    </main>
 
-    <script src="script.js"></script>
+    <div class="footer">Made with ❤ in Chennai</div>
+
+    <!-- Optional: Add a simple background animation script -->
+    <script>
+      // Simple animated dots for bgCanvas
+      const canvas = document.getElementById("bgCanvas");
+      const ctx = canvas.getContext("2d");
+      function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+      window.addEventListener("resize", resize);
+      resize();
+      let dots = Array.from({ length: 40 }, () => ({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: Math.random() * 2 + 1,
+        dx: Math.random() * 0.5 + 0.2,
+        dy: Math.random() * 0.5 + 0.2,
+      }));
+      function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        dots.forEach((dot) => {
+          ctx.beginPath();
+          ctx.arc(dot.x, dot.y, dot.r, 0, 2 * Math.PI);
+          ctx.fillStyle = "#ffc30088";
+          ctx.fill();
+          dot.x += dot.dx;
+          dot.y += dot.dy;
+          if (dot.x > canvas.width) dot.x = 0;
+          if (dot.y > canvas.height) dot.y = 0;
+        });
+        requestAnimationFrame(animate);
+      }
+      animate();
+    </script>
   </body>
 </html>

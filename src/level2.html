@@ -25,6 +25,13 @@
       </div>
     </div>
 
+    <div class="controls">
+      <button id="restartBtn" class="control-btn restart">
+        🔄 மீண்டும் தொடங்கு (Restart)
+      </button>
+      <button id="exitBtn" class="control-btn exit">🚪 வெளியேறு (Exit)</button>
+    </div>
+
     <script>
       const vowels = [
         {
@@ -159,6 +166,17 @@
           window.location.href = "buttonPage.html";
         }, 2500);
       }
+
+      document.getElementById("restartBtn").addEventListener("click", () => {
+        score = 0;
+        document.getElementById("score").textContent = score;
+        document.getElementById("result").textContent = "";
+        currentAnswer = null;
+      });
+
+      document.getElementById("exitBtn").addEventListener("click", () => {
+        window.location.href = "buttonPage.html"; // or any exit/home page
+      });
     </script>
     <script src="js/level1.js"></script>
   </body>

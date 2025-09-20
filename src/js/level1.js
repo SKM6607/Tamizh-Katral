@@ -142,7 +142,7 @@
 
   // next
   nextBtn.addEventListener("click", () => {
-    if (currentIndex < letters.length - 1) {
+    if (currentIndex < letters.length) {
       currentIndex++;
       updateCard();
       console.log("NEXT");
